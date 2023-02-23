@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Cabin:wght@400;500;700&display=swap');
+
+
+* {
+    color: #666153;
+    font-family: 'Cabin', sans-serif;
+    font-weight: 700;
+}
+
+body {
+    background-color: #FAD87F;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#start-screen form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+form label {
+    color: #F492BC;
+    font-weight: 700;
+    font-size: 30px;
+}
+
+h1,
+h2 {
+    text-align: center;
+    font-family: 'Bowlby One SC', cursive;
+    font-size: 4rem;
+    color: #666153;
+    margin: 20px;
+}
+
+input {
+    height: 48px;
+    width: 300px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    padding-inline: 10px;
+    font-weight: 400;
+}
+
+p, button, div, span, input {
+    font-size: 18px;
+}
+
+button {
+    height: 48px;
+    width: 150px;
+    background-color: white;
+    color: #F492BC;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 5px 5px 5px #666153;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #F492BC;
+    color: white;
+    transition: 0.3s;
+}
+
+#timer {
+    text-align: right;
+}
+
+.user-timer-wrapper {
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+}
+
+#display-username {
+    color: #F492BC;
+    text-transform: uppercase;
+}
+
+#game-board {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+#game-screen {
+    position: relative;
+}
+
+.background-wrapper {
+    position: absolute;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 15px;
+}
+
+.background {
+    z-index: 2;
+}
+
+.card {
+    z-index: 1;
+}
+
+#end-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
