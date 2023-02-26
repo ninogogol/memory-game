@@ -109,12 +109,11 @@ function setTimer() {
   let remainingSeconds = countDownSeconds;
   const intervalId = setInterval(() => {
     timeDisplay.textContent = remainingSeconds;
-    remainingSeconds--;
 
     // End the game
     // Stop the timer, and display the end screen with the player's final score. 
     // Provide a button to allow the player to play again.
-    if (remainingSeconds <= 0 || score === 6) {
+    if (remainingSeconds === 0 || score === 6) {
         clearInterval(intervalId);
         
         gameScreen.classList.add('hidden');
@@ -124,6 +123,8 @@ function setTimer() {
         endResult.innerText = `Your final score is ${score}/6 in ${countDownSeconds - remainingSeconds} seconds.`;
 
     }
+
+    remainingSeconds--;
 
     // Handle play again button click
     // Listen for a click on the play again button, 
