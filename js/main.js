@@ -107,7 +107,9 @@ function renderGameBoard() {
 function setTimer() {
   const countDownSeconds = 30;
   let remainingSeconds = countDownSeconds;
+
   const intervalId = setInterval(() => {
+
     timeDisplay.textContent = remainingSeconds;
 
     // End the game
@@ -120,7 +122,7 @@ function setTimer() {
         endScreen.classList.remove('hidden');
 
         endGreeting.innerText = `Thanks for playing, ${usernameInput.value}!`;
-        endResult.innerText = `Your final score is ${score}/6 in ${countDownSeconds - remainingSeconds - 1} seconds.`;
+        endResult.innerText = `Your final score is ${score}/6 in ${countDownSeconds - remainingSeconds} seconds.`;
 
     }
 
