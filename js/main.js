@@ -102,7 +102,8 @@ function renderGameBoard() {
 }
   
 
-  // Set timer
+// Set timer
+// Start a timer to count down from 30 seconds, and update the UI accordingly
 function setTimer() {
   const countDownSeconds = 30;
   let remainingSeconds = countDownSeconds;
@@ -110,6 +111,9 @@ function setTimer() {
     timeDisplay.textContent = remainingSeconds;
     remainingSeconds--;
 
+    // End the game
+    // Stop the timer, and display the end screen with the player's final score. 
+    // Provide a button to allow the player to play again.
     if (remainingSeconds < 0 || score === 6) {
         clearInterval(intervalId);
         
@@ -121,6 +125,9 @@ function setTimer() {
 
     }
 
+    // Handle play again button click
+    // Listen for a click on the play again button, 
+    // and reset the game state to allow the player to start a new game.
     playAgainBtn.addEventListener('click', () => {
         endScreen.classList.add('hidden');
         startScreen.classList.remove('hidden');
@@ -130,7 +137,8 @@ function setTimer() {
   }, 1000);
 }
 
-
+// Handle click events on cards
+// Check which card was clicked, and store its image source in a variable
 function handleClick(cardImage) {
   if(!canClickCards) {
     return;
@@ -147,22 +155,21 @@ function handleClick(cardImage) {
     
     canClickCards = false;
 
+    // Check for a match
+    // Compare the image sources of the two clicked cards, 
+    // and handle the game logic accordingly. If they match, 
+    // increment the score, otherwise flip the cards back over.
     if (firstCard.src === secondCard.src) {
-      firstCard.classList.add('matched');
-      secondCard.classList.add('matched');
       score++;
+      canClickCards = true;
     } else {
       setTimeout(() => {
         firstCard.style.zIndex = null;
         secondCard.style.zIndex = null;
+        canClickCards = true;
       }, 1500);
     }
 
     clickCount = 0;
-
-    setTimeout(() => {
-      canClickCards = true;
-    }, 1500);
   }
-
 }
