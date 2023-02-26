@@ -120,7 +120,7 @@ function setTimer() {
         endScreen.classList.remove('hidden');
 
         endGreeting.innerText = `Thanks for playing, ${usernameInput.value}!`;
-        endResult.innerText = `Your final score is ${score}/6 in ${countDownSeconds - remainingSeconds} seconds.`;
+        endResult.innerText = `Your final score is ${score}/6 in ${countDownSeconds - remainingSeconds - 1} seconds.`;
 
     }
 
