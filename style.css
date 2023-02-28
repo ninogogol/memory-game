@@ -114,11 +114,12 @@ button:hover {
 
 .background {
     z-index: 2;
-    cursor: pointer;
+    user-select: none;
 }
 
 .card {
     z-index: 1;
+    user-select: none;
 }
 
 #end-screen {
