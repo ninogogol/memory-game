@@ -115,7 +115,7 @@ function setTimer() {
     // End the game
     // Stop the timer, and display the end screen with the player's final score. 
     // Provide a button to allow the player to play again.
-    if (remainingSeconds === 0 || score === 6) {
+    if (remainingSeconds === 0 ) {
         clearInterval(intervalId);
         
         gameScreen.classList.add('hidden');
@@ -123,6 +123,17 @@ function setTimer() {
 
         endGreeting.innerText = `Thanks for playing, ${usernameInput.value}!`;
         endResult.innerText = `Your final score is ${score}/6 in ${countDownSeconds - remainingSeconds} seconds.`;
+    }
+
+    if (score === 6) {
+
+        clearInterval(intervalId);
+        
+        gameScreen.classList.add('hidden');
+        endScreen.classList.remove('hidden');
+
+        endGreeting.innerText = `Thanks for playing, ${usernameInput.value}!`;
+        endResult.innerText = `Your final score is ${score}/6 in ${countDownSeconds - remainingSeconds - 1} seconds.`;
 
     }
 
