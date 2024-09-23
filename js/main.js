@@ -18,7 +18,6 @@ let firstCard = null;
 let secondCard = null;
 let canClickCards = true;
 
-
 // Define an array of all possible image sources
 const imageSources = ['./images/img (1).jpg', './images/img (2).jpg', './images/img (3).jpg', './images/img (4).jpg', './images/img (5).jpg', './images/img (6).jpg', './images/img (7).jpg','./images/img (6).jpg', './images/img (9).jpg', './images/img (10).jpg', './images/img (11).jpg', './images/img (12).jpg', './images/img (13).jpg', './images/img (14).jpg', './images/img (15).jpg', './images/img (16).jpg', './images/img (17).jpg', './images/img (16).jpg', './images/img (19).jpg', './images/img (20).jpg', './images/img (21).jpg', './images/img (22).jpg', './images/img (23).jpg', './images/img (24).jpg', './images/img (25).jpg', './images/img (26).jpg', './images/img (27).jpg', './images/img (26).jpg', './images/img (29).jpg', './images/img (30).jpg', './images/img (31).jpg', './images/img (32).jpg'];
 
@@ -100,59 +99,46 @@ function renderGameBoard() {
 
   counter = 0;
 }
-  
 
 // Set timer
-// Start a timer to count down from 30 seconds, and update the UI accordingly
 function setTimer() {
   const countDownSeconds = 30;
   let remainingSeconds = countDownSeconds;
 
   const intervalId = setInterval(() => {
-
     timeDisplay.textContent = remainingSeconds;
 
-    // End the game
-    // Stop the timer, and display the end screen with the player's final score. 
-    // Provide a button to allow the player to play again.
-    if (remainingSeconds === 0 ) {
-        clearInterval(intervalId);
-        
-        gameScreen.classList.add('hidden');
-        endScreen.classList.remove('hidden');
-
-        endGreeting.innerText = `Thanks for playing, ${usernameInput.value}!`;
-        endResult.innerText = `Your final score is ${score}/6 in ${countDownSeconds - remainingSeconds} seconds.`;
+    if (remainingSeconds === 0) {
+      clearInterval(intervalId);
+      gameScreen.classList.add('hidden');
+      endScreen.classList.remove('hidden');
+      endGreeting.innerText = `Thanks for playing, ${usernameInput.value}!`;
+      endResult.innerText = `Your final score is ${score}/6 in ${countDownSeconds - remainingSeconds} seconds.`;
     }
 
     if (score === 6) {
+      clearInterval(intervalId);
+      
+      // Start fireworks
+      showFireworks();
 
-        clearInterval(intervalId);
-        
-        gameScreen.classList.add('hidden');
-        endScreen.classList.remove('hidden');
-
-        endGreeting.innerText = `Thanks for playing, ${usernameInput.value}!`;
-        endResult.innerText = `Your final score is ${score}/6 in ${countDownSeconds - remainingSeconds - 1} seconds.`;
-
+      gameScreen.classList.add('hidden');
+      endScreen.classList.remove('hidden');
+      endGreeting.innerText = `Thanks for playing, ${usernameInput.value}!`;
+      endResult.innerText = `Your final score is ${score}/6 in ${countDownSeconds - remainingSeconds - 1} seconds.`;
     }
 
     remainingSeconds--;
 
-    // Handle play again button click
-    // Listen for a click on the play again button, 
-    // and reset the game state to allow the player to start a new game.
     playAgainBtn.addEventListener('click', () => {
-        endScreen.classList.add('hidden');
-        startScreen.classList.remove('hidden');
-        score = 0;
-    })
-
+      endScreen.classList.add('hidden');
+      startScreen.classList.remove('hidden');
+      score = 0;
+    });
   }, 1000);
 }
 
 // Handle click events on cards
-// Check which card was clicked, and store its image source in a variable
 function handleClick(cardImage) {
   if(!canClickCards) {
     return;
@@ -169,10 +155,6 @@ function handleClick(cardImage) {
     
     canClickCards = false;
 
-    // Check for a match
-    // Compare the image sources of the two clicked cards, 
-    // and handle the game logic accordingly. If they match, 
-    // increment the score, otherwise flip the cards back over.
     if (firstCard.src === secondCard.src) {
       score++;
       canClickCards = true;
@@ -186,4 +168,46 @@ function handleClick(cardImage) {
 
     clickCount = 0;
   }
+}
+
+// Fireworks functions
+function showFireworks() {
+  const fireworksContainer = document.createElement('div');
+  fireworksContainer.classList.add('fireworks-container');
+  document.body.appendChild(fireworksContainer);
+
+  // 100 Feuerwerkskörper erzeugen über 10 Sekunden
+  const intervalId = setInterval(() => {
+    for (let i = 0; i < 10; i++) {
+      createFirework(fireworksContainer);
+    }
+  }, 100); // alle 100ms ein Feuerwerk
+
+  // Feuerwerk nach 10 Sekunden beenden
+  setTimeout(() => {
+    clearInterval(intervalId);
+    fireworksContainer.remove();
+  }, 10000); // Feuerwerk dauert 10 Sekunden
+}
+
+function createFirework(container) {
+  const firework = document.createElement('div');
+  firework.classList.add('firework');
+
+  // Zufällige Position und Größe
+  firework.style.left = `${Math.random() * 100}vw`;
+  firework.style.top = `${Math.random() * 100}vh`;
+  firework.style.width = `${Math.random() * 10 + 5}px`;
+  firework.style.height = firework.style.width;
+
+  // Zufällige Farbe (wir nutzen HSL für bunte Farben)
+  const hue = Math.random() * 360; // Zufälliger Farbton von 0 bis 360 Grad
+  firework.style.setProperty('--hue', hue);
+
+  container.appendChild(firework);
+
+  // Entferne den Feuerwerkskörper nach der Animation (2 Sekunden)
+  setTimeout(() => {
+    firework.remove();
+  }, 2000);
 }
