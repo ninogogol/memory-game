@@ -1,6 +1,6 @@
 # Memory Game
 
-**This is a JavaScript implementation of a memory game. The game generates 6 pairs of unique images and 
+**This is a JavaScript implementation of a memory game (Desktop). The game generates 6 pairs of unique images and 
 randomizes their position on the board. The objective of the game is to find all 6 pairs of cards 
 by clicking on them. Once all pairs are found or the timer runs out, 
 the game ends and displays the final score.**
